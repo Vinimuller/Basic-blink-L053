@@ -32,6 +32,19 @@ int main(void)
 	GPIOA->MODER 	&= ~GPIO_MODER_MODE7_1;						//Set GPIOA pin 7
 	GPIOA->BSRR 	|= GPIO_BSRR_BR_7;							//Set pin to low
 
+	//Timer configuration
+	RCC->APB1ENR |= RCC_APB1ENR_TIM6EN; //Enable TIM 6 clock
+	TIM6->CR1 	|= TIM_CR1_URS; 		//Only counter overflow generate interrupt
+	TIM6->DIER 	|= TIM_DIER_UIE;		//Enable interrupt
+	TIM6->PSC 	= 2099;					//Set prescaller
+	TIM6->ARR 	= 999;					//Set ARR
+	TIM6->EGR 	|= TIM_EGR_UG;			//Update registers values
+
+	NVIC_EnableIRQ(TIM6_DAC_IRQn);		//Enable IRQ
+	NVIC_SetPriority(TIM6_DAC_IRQn, 0);	//Set IRQ priority
+
+	TIM6->CR1 	|= TIM_CR1_CEN;			//Start timer
+
 
 	while(1)
 	{
