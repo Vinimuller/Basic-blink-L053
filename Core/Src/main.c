@@ -23,7 +23,20 @@
 
 int main(void)
 {
+	//GPIO configuration
+	RCC->IOPENR 	|= RCC_IOPENR_GPIOBEN;						//Enable GPIOB clock
+	GPIOB->MODER 	= GPIO_MODER_MODE0_0 | GPIO_MODER_MODE1_0;	//Set GPIOB pin 0 and 1 as output
+	GPIOB->BSRR 	|= GPIO_BSRR_BR_0 | GPIO_BSRR_BR_1;			//Set pin to low
 
+	RCC->IOPENR 	|= RCC_IOPENR_GPIOAEN;						//Enable GPIOA clock
+	GPIOA->MODER 	&= ~GPIO_MODER_MODE7_1;						//Set GPIOA pin 7
+	GPIOA->BSRR 	|= GPIO_BSRR_BR_7;							//Set pin to low
+
+
+	while(1)
+	{
+
+	}
 
 	return 0;
 }
