@@ -21,6 +21,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+//Timer 6 interrupt Handler
+void TIM6_DAC_IRQHandler(void)
+{
+	if(TIM6->SR & TIM_SR_UIF)	//Check if it was a timer event
+	{
+		TIM6->SR &= ~TIM_SR_UIF;//Clear timer interrupt flag
+		GPIOB->ODR ^= GPIO_IDR_ID0_Msk | GPIO_IDR_ID1_Msk;
+		GPIOA->ODR ^= GPIO_IDR_ID7_Msk;
+	}
+}
+
 int main(void)
 {
 	//GPIO configuration
