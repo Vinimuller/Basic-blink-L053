@@ -55,6 +55,7 @@ int main(void)
 	NVIC_SetPriority(TIM6_DAC_IRQn, 0);	//Set IRQ priority
 
 	//tchau
+	//qualquer coisa
 
 	TIM6->CR1 	|= TIM_CR1_CEN;			//Start timer
 
