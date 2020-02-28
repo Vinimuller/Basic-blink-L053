@@ -56,6 +56,8 @@ int main(void)
 
 	TIM6->CR1 	|= TIM_CR1_CEN;			//Start timer
 
+	//oie
+
 
 	while(1)
 	{
